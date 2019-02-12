@@ -1,0 +1,1 @@
+sudo apt-get install cmake cmake-curses-gui make gcc g++ bison flex libsctp-dev libgnutls-dev libgcrypt-dev libidn11-dev
