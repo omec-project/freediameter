@@ -29,7 +29,7 @@ ENDIF (NOT DIAMID_IDNA_IGNORE)
 
 # Disable expiration of connections with dynamically connected peers as per RFC 3539 ? (default is enabled)
 # Note: if someone needs, we could also make the delay configurable here...
-OPTION(DISABLE_PEER_EXPIRY "Disable RFC3539 Peers Connections Expiration after inactivity?" OFF)
+OPTION(DISABLE_PEER_EXPIRY "Disable RFC3539 Peers Connections Expiration after inactivity?" ON)
 
 # The following workaround increases compatibility with some implementations without breaking anything in freeDiameter, 
 # so it can be enabled without risk. We keep it disabled by default anyway for those people who use freeDiameter to check the 
