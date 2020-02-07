@@ -26,7 +26,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1506697187.84
+#define GEN_DATE  1570662833.67
 
 const char *ts29272_avps_proto_ver = PROTO_VER;
 const double ts29272_avps_gen_date = GEN_DATE;
@@ -2222,6 +2222,82 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
+		/* MBSFN-Area-ID */
+		{
+			struct dict_avp_data data = {
+				1695,	/* Code */
+				10415,	/* Vendor */
+				"MBSFN-Area-ID",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Carrier-Frequency */
+		{
+			struct dict_avp_data data = {
+				1696,	/* Code */
+				10415,	/* Vendor */
+				"Carrier-Frequency",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* RDS-Indicator */
+		{
+			struct dict_avp_data data = {
+				1697,	/* Code */
+				10415,	/* Vendor */
+				"RDS-Indicator",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_INTEGER32	/* base type of data */
+			};
+			struct dict_object        *type;
+			struct dict_type_data     tdata = { AVP_TYPE_INTEGER32, "3GPP/Enumerated(RDS-Indicator)", NULL, NULL, NULL };
+			struct dict_enumval_data        t_1 = { "DISABLED", { .i32=0 }};
+			struct dict_enumval_data        t_2 = { "ENABLED", { .i32=1 }};
+			/* Create the Enumerated type, and then the AVP */
+			CHECK_dict_new( DICT_TYPE, &tdata, NULL, &type);
+			CHECK_dict_new( DICT_ENUMVAL, &t_1, type, NULL);
+			CHECK_dict_new( DICT_ENUMVAL, &t_2, type, NULL);
+			CHECK_dict_new( DICT_AVP, &data, type, NULL);
+		};
+		/* Core-Network-Restrictions */
+		{
+			struct dict_avp_data data = {
+				1704,	/* Code */
+				10415,	/* Vendor */
+				"Core-Network-Restrictions",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Interworking-5GS-Indicator */
+		{
+			struct dict_avp_data data = {
+				1706,	/* Code */
+				10415,	/* Vendor */
+				"Interworking-5GS-Indicator",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_INTEGER32	/* base type of data */
+			};
+			struct dict_object        *type;
+			struct dict_type_data     tdata = { AVP_TYPE_INTEGER32, "3GPP/Enumerated(Interworking-5GS-Indicator)", NULL, NULL, NULL };
+			struct dict_enumval_data        t_1 = { "NOT_SUBSCRIBED", { .i32=0 }};
+			struct dict_enumval_data        t_2 = { "SUBSCRIBED", { .i32=1 }};
+			/* Create the Enumerated type, and then the AVP */
+			CHECK_dict_new( DICT_TYPE, &tdata, NULL, &type);
+			CHECK_dict_new( DICT_ENUMVAL, &t_1, type, NULL);
+			CHECK_dict_new( DICT_ENUMVAL, &t_2, type, NULL);
+			CHECK_dict_new( DICT_AVP, &data, type, NULL);
+		};
 		/* V2X-Subscription-Data */
 		{
 			/* Grouped */
@@ -2358,6 +2434,20 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 				"VPLMN-CSG-Subscription-Data",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flag values */
+				AVP_TYPE_GROUPED	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
+		}
+		/* MBSFN-Area */
+		{
+			/* Grouped */
+			struct dict_object * avp;
+			struct dict_avp_data data = {
+				1694,	/* Code */
+				10415,	/* Vendor */
+				"MBSFN-Area",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
@@ -2628,16 +2718,16 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
 		}
-		/* EPS-Subscribed-QoS-Profile */
+		/* MDT-Configuration */
 		{
 			/* Grouped */
 			struct dict_object * avp;
 			struct dict_avp_data data = {
-				1431,	/* Code */
+				1622,	/* Code */
 				10415,	/* Vendor */
-				"EPS-Subscribed-QoS-Profile",	/* Name */
+				"MDT-Configuration",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
-				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flag values */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
@@ -2670,16 +2760,16 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
 		}
-		/* MDT-Configuration */
+		/* EPS-Subscribed-QoS-Profile */
 		{
 			/* Grouped */
 			struct dict_object * avp;
 			struct dict_avp_data data = {
-				1622,	/* Code */
+				1431,	/* Code */
 				10415,	/* Vendor */
-				"MDT-Configuration",	/* Name */
+				"EPS-Subscribed-QoS-Profile",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
-				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
@@ -2892,7 +2982,9 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 		struct local_rules_definition rules[] =
 		{
 			{ { .avp_vendor = 10415, .avp_name = "Max-Requested-Bandwidth-UL"}, RULE_REQUIRED, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Max-Requested-Bandwidth-DL"}, RULE_REQUIRED, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "Max-Requested-Bandwidth-DL"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-Max-Requested-BW-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-Max-Requested-BW-DL"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -2991,6 +3083,19 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 		{
 			{ { .avp_vendor = 10415, .avp_name = "CSG-Id"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Expiration-Date"}, RULE_OPTIONAL, -1, -1 }
+		};
+		PARSE_loc_rules( rules, avp );
+	  }
+	  /* MBSFN-Area */
+	  {
+		/* Grouped */
+		struct dict_object * avp;
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "MBSFN-Area"};
+		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
+		struct local_rules_definition rules[] =
+		{
+			{ { .avp_vendor = 10415, .avp_name = "MBSFN-Area-ID"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Carrier-Frequency"}, RULE_REQUIRED, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -3261,16 +3366,34 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
-	  /* EPS-Subscribed-QoS-Profile */
+	  /* MDT-Configuration */
 	  {
 		/* Grouped */
 		struct dict_object * avp;
-		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "EPS-Subscribed-QoS-Profile"};
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "MDT-Configuration"};
 		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
 		struct local_rules_definition rules[] =
 		{
-			{ { .avp_vendor = 10415, .avp_name = "QoS-Class-Identifier"}, RULE_REQUIRED, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Allocation-Retention-Priority"}, RULE_REQUIRED, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "Job-Type"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Area-Scope"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "List-Of-Measurements"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Reporting-Trigger"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Report-Interval"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Report-Amount"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-RSRP"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-RSRQ"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Logging-Interval"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Logging-Duration"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Measurement-Period-LTE"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Measurement-Period-UMTS"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Collection-Period-RRM-LTE"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Collection-Period-RRM-UMTS"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Positioning-Method"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Measurement-Quantity"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1F"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1I"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "MDT-Allowed-PLMN-Id"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "MBSFN-Area"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -3302,33 +3425,16 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
-	  /* MDT-Configuration */
+	  /* EPS-Subscribed-QoS-Profile */
 	  {
 		/* Grouped */
 		struct dict_object * avp;
-		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "MDT-Configuration"};
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "EPS-Subscribed-QoS-Profile"};
 		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
 		struct local_rules_definition rules[] =
 		{
-			{ { .avp_vendor = 10415, .avp_name = "Job-Type"}, RULE_REQUIRED, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Area-Scope"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "List-Of-Measurements"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Reporting-Trigger"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Report-Interval"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Report-Amount"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-RSRP"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-RSRQ"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Logging-Interval"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Logging-Duration"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Measurement-Period-LTE"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Measurement-Period-UMTS"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Collection-Period-RRM-LTE"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Collection-Period-RRM-UMTS"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Positioning-Method"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Measurement-Quantity"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1F"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1I"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "MDT-Allowed-PLMN-Id"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "QoS-Class-Identifier"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Allocation-Retention-Priority"}, RULE_REQUIRED, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -3436,7 +3542,9 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "SCEF-ID"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "SCEF-Realm"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Preferred-Data-Mode"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "PDN-Connection-Continuity"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "PDN-Connection-Continuity"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "RDS-Indicator"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Interworking-5GS-Indicator"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -3585,11 +3693,11 @@ int dict_entry(char * conffile)
 	return dict_ts29272_avps_load_rules(conffile);
 }
 
-const char* dict_ts29272_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return ts29272_avps_proto_ver;
 }
 
-const double dict_ts29272_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return ts29272_avps_gen_date;
 }
 
