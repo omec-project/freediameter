@@ -19,14 +19,13 @@
  License: same as freeDiameter
 ****************/
 
-
 /* 
  * Dictionary definitions of objects specified in rfc4004_avps.
  */
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "unspecified"
-#define GEN_DATE  1506697143.43
+#define GEN_DATE  1577392601.03
 
 const char *rfc4004_avps_proto_ver = PROTO_VER;
 const double rfc4004_avps_gen_date = GEN_DATE;
@@ -260,18 +259,6 @@ static int dict_rfc4004_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
-		/* MIP-Home-Agent-Host */
-		{
-			struct dict_avp_data data = {
-				348,	/* Code */
-				0,	/* Vendor */
-				"MIP-Home-Agent-Host",	/* Name */
-				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
-				AVP_FLAG_MANDATORY,	/* Fixed flag values */
-				AVP_TYPE_OCTETSTRING	/* base type of data */
-			};
-			CHECK_dict_new( DICT_AVP, &data, DiameterIdentity_type, NULL);
-		};
 		/* MIP-FA-to-HA-SPI */
 		{
 			struct dict_avp_data data = {
@@ -392,6 +379,20 @@ static int dict_rfc4004_avps_load_defs(char * conffile)
 				328,	/* Code */
 				0,	/* Vendor */
 				"MIP-FA-to-HA-MSA",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_MANDATORY,	/* Fixed flag values */
+				AVP_TYPE_GROUPED	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
+		}
+		/* MIP-Home-Agent-Host */
+		{
+			/* Grouped */
+			struct dict_object * avp;
+			struct dict_avp_data data = {
+				348,	/* Code */
+				0,	/* Vendor */
+				"MIP-Home-Agent-Host",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_MANDATORY,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
@@ -526,6 +527,19 @@ static int dict_rfc4004_avps_load_rules(char * conffile)
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
+	  /* MIP-Home-Agent-Host */
+	  {
+		/* Grouped */
+		struct dict_object * avp;
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 0, .avp_name = "MIP-Home-Agent-Host"};
+		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
+		struct local_rules_definition rules[] =
+		{
+			{ { .avp_vendor = 0, .avp_name = "Destination-Realm"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 0, .avp_name = "Destination-Host"}, RULE_REQUIRED, -1, -1 }
+		};
+		PARSE_loc_rules( rules, avp );
+	  }
 	  /* MIP-MN-to-FA-MSA */
 	  {
 		/* Grouped */
@@ -641,11 +655,11 @@ int dict_entry(char * conffile)
 	return dict_rfc4004_avps_load_rules(conffile);
 }
 
-const char* dict_rfc4004_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return rfc4004_avps_proto_ver;
 }
 
-const double dict_rfc4004_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return rfc4004_avps_gen_date;
 }
 

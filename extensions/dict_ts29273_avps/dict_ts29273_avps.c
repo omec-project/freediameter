@@ -19,14 +19,13 @@
  License: same as freeDiameter
 ****************/
 
-
 /* 
  * Dictionary definitions of objects specified in ts29273_avps (e20).
  */
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e20"
-#define GEN_DATE  1506697133.32
+#define GEN_DATE  1570740583.5
 
 const char *ts29273_avps_proto_ver = PROTO_VER;
 const double ts29273_avps_gen_date = GEN_DATE;
@@ -208,7 +207,7 @@ static int dict_ts29273_avps_load_defs(char * conffile)
 		{
 			struct dict_avp_data data = {
 				506,	/* Code */
-				10415,	/* Vendor */
+				0,	/* Vendor */
 				"Mobile-Node-Identifier",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_MANDATORY,	/* Fixed flag values */
@@ -574,6 +573,18 @@ static int dict_ts29273_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
+		/* AAR-Flags */
+		{
+			struct dict_avp_data data = {
+				1539,	/* Code */
+				10415,	/* Vendor */
+				"AAR-Flags",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
 		/* Access-Network-Info */
 		{
 			/* Grouped */
@@ -799,8 +810,10 @@ static int dict_ts29273_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Trace-Info"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "TWAN-Default-APN-Context-Id"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "TWAN-Access-Info"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "UE-Usage-Type"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Emergency-Info"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "ERP-Authorization"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "ERP-Authorization"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Core-Network-Restrictions"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -822,15 +835,15 @@ int dict_entry(char * conffile)
 	return dict_ts29273_avps_load_rules(conffile);
 }
 
-const char* dict_ts29273_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return ts29273_avps_proto_ver;
 }
 
-const double dict_ts29273_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return ts29273_avps_gen_date;
 }
 
-EXTENSION_ENTRY2("dict_ts29273_avps", dict_ts29273_avps_load_defs, dict_ts29273_avps_load_rules, "dict_ts32299_avps", "dict_ts29272_avps", "dict_ts29212_avps", "dict_ts29229_avps", "dict_rfc5778_avps", "dict_ts29061_avps", "dict_rfc4006bis_avps", "dict_rfc6942_avps", "dict_rfc7155_avps", "dict_rfc4072_avps", "dict_rfc5447_avps", "dict_rfc7683_avps", "dict_rfc6734_avps", "dict_rfc4004_avps", "dict_rfc5580_avps", "dict_rfc5777_avps", "dict_draftload_avps", "dict_etsi283034_avps", "dict_rfc7944_avps");
+EXTENSION_ENTRY2("dict_ts29273_avps", dict_ts29273_avps_load_defs, dict_ts29273_avps_load_rules, "dict_ts32299_avps", "dict_ts29272_avps", "dict_ts29212_avps", "dict_ts29336_avps", "dict_ts29229_avps", "dict_rfc5778_avps", "dict_ts29061_avps", "dict_rfc4006bis_avps", "dict_rfc6942_avps", "dict_rfc7155_avps", "dict_rfc4072_avps", "dict_rfc5447_avps", "dict_draftload_avps", "dict_rfc7683_avps", "dict_rfc6734_avps", "dict_rfc4004_avps", "dict_rfc5580_avps", "dict_rfc5777_avps", "dict_etsi283034_avps", "dict_rfc7944_avps");
 
 
 
