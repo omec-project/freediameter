@@ -10,7 +10,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1558200675.01
+#define GEN_DATE  1584143709.28
 
 const char *gx_proto_ver = PROTO_VER;
 const double gx_gen_date = GEN_DATE;
