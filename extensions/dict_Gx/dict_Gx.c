@@ -1,5 +1,6 @@
 /*
 * Copyright (c) 2017 Sprint
+* Copyright (c) 2020 Sprint
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1530130752.96
+#define GEN_DATE  1584143709.28
 
 const char *gx_proto_ver = PROTO_VER;
 const double gx_gen_date = GEN_DATE;
@@ -100,15 +101,15 @@ struct local_rules_definition {
 static int dict_gx_load_defs(char * conffile)
 {
    TRACE_ENTRY("%p", conffile);
-	struct dict_object * app_id16777224;
+	struct dict_object * app_id16777238;
 
 	/* Application Section */
 	{
 	  {
 			struct dict_object * vendor;
 			CHECK_dict_search(DICT_VENDOR, VENDOR_BY_NAME, "3GPP", &vendor)
-			struct dict_application_data data = { 16777224, "Gx" };
-			CHECK_dict_new( DICT_APPLICATION, &data, vendor, &app_id16777224)
+			struct dict_application_data data = { 16777238, "Gx" };
+			CHECK_dict_new( DICT_APPLICATION, &data, vendor, &app_id16777238)
 	  }
 	  /* Result codes */
 	  {
@@ -198,7 +199,6 @@ static int dict_gx_load_rules(char * conffile)
 			{ { .avp_vendor = 0, .avp_name = "Destination-Realm"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "CC-Request-Type"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "CC-Request-Number"}, RULE_REQUIRED, -1, -1 },
-			{ { .avp_vendor = 0, .avp_name = "Service-Context-Id"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Credit-Management-Status"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Destination-Host"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Origin-State-Id"}, RULE_OPTIONAL, -1, -1 },
@@ -269,6 +269,7 @@ static int dict_gx_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "HeNB-Local-IP-Address"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "UE-Local-IP-Address"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "UDP-Source-Port"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "TCP-Source-Port"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Information"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 13019, .avp_name = "Logical-Access-Id"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 13019, .avp_name = "Physical-Access-Id"}, RULE_OPTIONAL, -1, -1 },
@@ -369,6 +370,7 @@ static int dict_gx_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "IP-CAN-Type"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "PRA-Install"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "PRA-Remove"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "CSG-Information-Reporting"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Proxy-Info"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Route-Record"}, RULE_OPTIONAL, -1, -1 }
 		};

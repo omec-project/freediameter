@@ -1,5 +1,6 @@
 /*
 * Copyright (c) 2017 Sprint
+* Copyright (c) 2020 Sprint
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1506697181.97
+#define GEN_DATE  1584143705.48
 
 const char *ts29212_avps_proto_ver = PROTO_VER;
 const double ts29212_avps_gen_date = GEN_DATE;
@@ -564,6 +565,54 @@ static int dict_ts29212_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data, Time_type, NULL);
 		};
+		/* Extended-APN-AMBR-DL */
+		{
+			struct dict_avp_data data = {
+				2848,	/* Code */
+				10415,	/* Vendor */
+				"Extended-APN-AMBR-DL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-APN-AMBR-UL */
+		{
+			struct dict_avp_data data = {
+				2849,	/* Code */
+				10415,	/* Vendor */
+				"Extended-APN-AMBR-UL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-GBR-DL */
+		{
+			struct dict_avp_data data = {
+				2850,	/* Code */
+				10415,	/* Vendor */
+				"Extended-GBR-DL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-GBR-UL */
+		{
+			struct dict_avp_data data = {
+				2851,	/* Code */
+				10415,	/* Vendor */
+				"Extended-GBR-UL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
 		/* Flow-Direction */
 		{
 			struct dict_avp_data data = {
@@ -685,6 +734,30 @@ static int dict_ts29212_avps_load_defs(char * conffile)
 			CHECK_dict_new( DICT_ENUMVAL, &t_7, type, NULL);
 			CHECK_dict_new( DICT_ENUMVAL, &t_8, type, NULL);
 			CHECK_dict_new( DICT_AVP, &data, type, NULL);
+		};
+		/* Max-PLR-DL */
+		{
+			struct dict_avp_data data = {
+				2852,	/* Code */
+				10415,	/* Vendor */
+				"Max-PLR-DL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_FLOAT32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Max-PLR-UL */
+		{
+			struct dict_avp_data data = {
+				2853,	/* Code */
+				10415,	/* Vendor */
+				"Max-PLR-UL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_FLOAT32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
 		/* Metering-Method */
 		{
@@ -1047,6 +1120,18 @@ static int dict_ts29212_avps_load_defs(char * conffile)
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_OCTETSTRING	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Presence-Reporting-Area-Node */
+		{
+			struct dict_avp_data data = {
+				2855,	/* Code */
+				10415,	/* Vendor */
+				"Presence-Reporting-Area-Node",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
@@ -2076,6 +2161,20 @@ static int dict_ts29212_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
 		}
+		/* Fixed-User-Location-Info */
+		{
+			/* Grouped */
+			struct dict_object * avp;
+			struct dict_avp_data data = {
+				2825,	/* Code */
+				10415,	/* Vendor */
+				"Fixed-User-Location-Info",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_GROUPED	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
+		}
 		/* QoS-Rule-Remove */
 		{
 			/* Grouped */
@@ -2114,20 +2213,6 @@ static int dict_ts29212_avps_load_defs(char * conffile)
 				"TFT-Packet-Filter-Information",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flag values */
-				AVP_TYPE_GROUPED	/* base type of data */
-			};
-			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
-		}
-		/* Fixed-User-Location-Info */
-		{
-			/* Grouped */
-			struct dict_object * avp;
-			struct dict_avp_data data = {
-				2825,	/* Code */
-				10415,	/* Vendor */
-				"Fixed-User-Location-Info",	/* Name */
-				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
-				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
@@ -2540,7 +2625,8 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
 		struct local_rules_definition rules[] =
 		{
-			{ { .avp_vendor = 10415, .avp_name = "Tunnel-Header-Length"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "Tunnel-Header-Length"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Tunnel-Header-Filter"}, RULE_OPTIONAL, 2, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -2594,7 +2680,8 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 		{
 			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Identifier"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Status"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Elements-List"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Elements-List"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Presence-Reporting-Area-Node"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -2608,6 +2695,8 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 		{
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-DL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "IP-CAN-Type"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "RAT-Type"}, RULE_OPTIONAL, -1, -1 }
 		};
@@ -2639,6 +2728,21 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Priority-Level"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Pre-emption-Capability"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Pre-emption-Vulnerability"}, RULE_OPTIONAL, -1, -1 }
+		};
+		PARSE_loc_rules( rules, avp );
+	  }
+	  /* Fixed-User-Location-Info */
+	  {
+		/* Grouped */
+		struct dict_object * avp;
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "Fixed-User-Location-Info"};
+		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
+		struct local_rules_definition rules[] =
+		{
+			{ { .avp_vendor = 10415, .avp_name = "SSID"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "BSSID"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 13019, .avp_name = "Logical-Access-Id"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 13019, .avp_name = "Physical-Access-Id"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -2684,21 +2788,6 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Security-Parameter-Index"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Flow-Label"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Flow-Direction"}, RULE_OPTIONAL, -1, -1 }
-		};
-		PARSE_loc_rules( rules, avp );
-	  }
-	  /* Fixed-User-Location-Info */
-	  {
-		/* Grouped */
-		struct dict_object * avp;
-		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "Fixed-User-Location-Info"};
-		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
-		struct local_rules_definition rules[] =
-		{
-			{ { .avp_vendor = 10415, .avp_name = "SSID"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "BSSID"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 13019, .avp_name = "Logical-Access-Id"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 13019, .avp_name = "Physical-Access-Id"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -2775,12 +2864,18 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "QoS-Class-Identifier"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Max-Requested-Bandwidth-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Max-Requested-Bandwidth-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-Max-Requested-BW-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-Max-Requested-BW-DL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Guaranteed-Bitrate-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Guaranteed-Bitrate-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-GBR-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-GBR-DL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Bearer-Identifier"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Allocation-Retention-Priority"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-DL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Conditional-APN-Aggregate-Max-Bitrate"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
@@ -2865,6 +2960,8 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Default-EPS-Bearer-QoS"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "APN-Aggregate-Max-Bitrate-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-UL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Extended-APN-AMBR-DL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Conditional-APN-Aggregate-Max-Bitrate"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
@@ -2889,6 +2986,8 @@ static int dict_ts29212_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Reporting-Level"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Online"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Offline"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Max-PLR-DL"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Max-PLR-UL"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Metering-Method"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Precedence"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "AF-Charging-Identifier"}, RULE_OPTIONAL, -1, -1 },
@@ -3134,11 +3233,11 @@ int dict_entry(char * conffile)
 	return dict_ts29212_avps_load_rules(conffile);
 }
 
-const char* dict_ts29212_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return ts29212_avps_proto_ver;
 }
 
-const double dict_ts29212_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return ts29212_avps_gen_date;
 }
 

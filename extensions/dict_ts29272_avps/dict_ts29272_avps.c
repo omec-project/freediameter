@@ -1,5 +1,6 @@
 /*
 * Copyright (c) 2017 Sprint
+* Copyright (c) 2020 Sprint
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1506697187.84
+#define GEN_DATE  1584143707.36
 
 const char *ts29272_avps_proto_ver = PROTO_VER;
 const double ts29272_avps_gen_date = GEN_DATE;
@@ -2222,6 +2223,30 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
+		/* MBSFN-Area-ID */
+		{
+			struct dict_avp_data data = {
+				1695,	/* Code */
+				10415,	/* Vendor */
+				"MBSFN-Area-ID",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Carrier-Frequency */
+		{
+			struct dict_avp_data data = {
+				1696,	/* Code */
+				10415,	/* Vendor */
+				"Carrier-Frequency",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
 		/* V2X-Subscription-Data */
 		{
 			/* Grouped */
@@ -2358,6 +2383,20 @@ static int dict_ts29272_avps_load_defs(char * conffile)
 				"VPLMN-CSG-Subscription-Data",	/* Name */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flag values */
+				AVP_TYPE_GROUPED	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
+		}
+		/* MBSFN-Area */
+		{
+			/* Grouped */
+			struct dict_object * avp;
+			struct dict_avp_data data = {
+				1694,	/* Code */
+				10415,	/* Vendor */
+				"MBSFN-Area",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_GROUPED	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data , NULL, &avp);
@@ -2994,6 +3033,19 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
+	  /* MBSFN-Area */
+	  {
+		/* Grouped */
+		struct dict_object * avp;
+		struct dict_avp_request avp_vendor_plus_name =  { .avp_vendor = 10415, .avp_name = "MBSFN-Area"};
+		CHECK_dict_search(DICT_AVP,  AVP_BY_NAME_AND_VENDOR, &avp_vendor_plus_name, &avp)
+		struct local_rules_definition rules[] =
+		{
+			{ { .avp_vendor = 10415, .avp_name = "MBSFN-Area-ID"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "Carrier-Frequency"}, RULE_REQUIRED, -1, -1 }
+		};
+		PARSE_loc_rules( rules, avp );
+	  }
 	  /* MO-LR */
 	  {
 		/* Grouped */
@@ -3328,7 +3380,8 @@ static int dict_ts29272_avps_load_rules(char * conffile)
 			{ { .avp_vendor = 10415, .avp_name = "Measurement-Quantity"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1F"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 10415, .avp_name = "Event-Threshold-Event-1I"}, RULE_OPTIONAL, -1, -1 },
-			{ { .avp_vendor = 10415, .avp_name = "MDT-Allowed-PLMN-Id"}, RULE_OPTIONAL, -1, -1 }
+			{ { .avp_vendor = 10415, .avp_name = "MDT-Allowed-PLMN-Id"}, RULE_OPTIONAL, -1, -1 },
+			{ { .avp_vendor = 10415, .avp_name = "MBSFN-Area"}, RULE_OPTIONAL, -1, -1 }
 		};
 		PARSE_loc_rules( rules, avp );
 	  }
@@ -3585,11 +3638,11 @@ int dict_entry(char * conffile)
 	return dict_ts29272_avps_load_rules(conffile);
 }
 
-const char* dict_ts29272_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return ts29272_avps_proto_ver;
 }
 
-const double dict_ts29272_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return ts29272_avps_gen_date;
 }
 

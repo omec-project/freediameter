@@ -1,5 +1,6 @@
 /*
 * Copyright (c) 2017 Sprint
+* Copyright (c) 2020 Sprint
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "rfc4006bis"
-#define GEN_DATE  1506697121.72
+#define GEN_DATE  1584143701.31
 
 const char *creditcontrol_proto_ver = PROTO_VER;
 const double creditcontrol_gen_date = GEN_DATE;
@@ -195,7 +196,7 @@ static int dict_creditcontrol_load_rules(char * conffile)
 			{ { .avp_vendor = 0, .avp_name = "Origin-Realm"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Destination-Realm"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Auth-Application-Id"}, RULE_REQUIRED, -1, -1 },
-			{ { .avp_vendor = 0, .avp_name = "Service-Context-Id"}, RULE_REQUIRED, -1, -1 },
+			{ { .avp_vendor = 0, .avp_name = "Service-Context-Id"}, RULE_OPTIONAL, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "CC-Request-Type"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "CC-Request-Number"}, RULE_REQUIRED, -1, -1 },
 			{ { .avp_vendor = 0, .avp_name = "Destination-Host"}, RULE_OPTIONAL, -1, -1 },
@@ -272,11 +273,11 @@ int dict_entry(char * conffile)
 	return dict_creditcontrol_load_rules(conffile);
 }
 
-const char* dict_creditcontrol_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return creditcontrol_proto_ver;
 }
 
-const double dict_creditcontrol_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return creditcontrol_gen_date;
 }
 
