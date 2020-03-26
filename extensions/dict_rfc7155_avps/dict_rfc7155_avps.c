@@ -103,8 +103,73 @@ static int dict_rfc7155_avps_load_defs(char * conffile)
 
 	/* Derived AVP types section */
 	{
-		/* QoSFilterRule rfc7155 section: 4.1.1 */
+		/* QoSFilterRule */
 		{
+			/*
+				The QosFilterRule format is derived from the OctetString AVP Base
+				Format.  It uses the ASCII charset.  Packets may be marked or
+				metered based on the following information:
+
+				 Direction                          (in or out)
+				 Source and destination IP address  (possibly masked)
+				 Protocol
+				 Source and destination port        (lists or ranges)
+				 DSCP values                        (no mask or range)
+
+				Rules for the appropriate direction are evaluated in order; the
+				first matched rule terminates the evaluation.  Each packet is
+				evaluated once.  If no rule matches, the packet is treated as best
+				effort.  An access device unable to interpret or apply a QoS rule
+				SHOULD NOT terminate the session.
+
+				QoSFilterRule filters MUST follow the following format:
+
+				action dir proto from src to dst [options]
+
+        				tag    - Mark packet with a specific DSCP
+                				 [DIFFSERV].  The DSCP option MUST be
+                				 included.
+        				meter  - Meter traffic.  The metering options
+                				 MUST be included.
+
+				dir           The format is as described under IPFilterRule.
+
+				proto         The format is as described under IPFilterRule.
+
+				src and dst   The format is as described under IPFilterRule.
+
+				 options:
+
+				 DSCP <color>
+				       Color values as defined in [DIFFSERV].  Exact
+				       matching of DSCP values is required (no masks or
+				       ranges).
+
+				 metering <rate> <color_under> <color_over>
+				       The metering option provides Assured Forwarding,
+				       as defined in [DIFFSERVAF], and MUST be present
+				       if the action is set to meter.  The rate option is
+				       the throughput, in bits per second, used
+				       by the access device to mark packets.  Traffic
+				       over the rate is marked with the color_over
+				       codepoint, and traffic under the rate is marked
+				       with the color_under codepoint.  The color_under
+				       and color_over options contain the drop
+				       preferences and MUST conform to the recommended
+				       codepoint keywords described in [DIFFSERVAF]
+				       (e.g., AF13).
+
+				       The metering option also supports the strict
+				       limit on traffic required by Expedited
+				       Forwarding, as defined in [DIFFSERVEF].  The
+				       color_over option may contain the keyword "drop"
+				       to prevent forwarding of traffic that exceeds the
+				       rate parameter.
+
+				 The rule syntax is a modified subset of ipfw(8) from FreeBSD,
+				 and the ipfw.c code may provide a useful base for
+				 implementations.
+			*/
 			struct dict_type_data data = { AVP_TYPE_OCTETSTRING,	"QoSFilterRule"		, NULL			, NULL			};
 			CHECK_dict_new( DICT_TYPE, &data , NULL, NULL);
 		}
