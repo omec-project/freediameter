@@ -26,7 +26,7 @@
 #include <freeDiameter/extension.h>
 
 #define PROTO_VER "e30"
-#define GEN_DATE  1506697136.73
+#define GEN_DATE  1570740579.61
 
 const char *ts29214_avps_proto_ver = PROTO_VER;
 const double ts29214_avps_gen_date = GEN_DATE;
@@ -275,6 +275,54 @@ static int dict_ts29214_avps_load_defs(char * conffile)
 				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
 				AVP_FLAG_VENDOR,	/* Fixed flag values */
 				AVP_TYPE_UNSIGNED64	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-Max-Requested-BW-DL */
+		{
+			struct dict_avp_data data = {
+				554,	/* Code */
+				10415,	/* Vendor */
+				"Extended-Max-Requested-BW-DL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-Max-Requested-BW-UL */
+		{
+			struct dict_avp_data data = {
+				555,	/* Code */
+				10415,	/* Vendor */
+				"Extended-Max-Requested-BW-UL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-Max-Supported-BW-DL */
+		{
+			struct dict_avp_data data = {
+				556,	/* Code */
+				10415,	/* Vendor */
+				"Extended-Max-Supported-BW-DL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
+			};
+			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
+		};
+		/* Extended-Max-Supported-BW-UL */
+		{
+			struct dict_avp_data data = {
+				557,	/* Code */
+				10415,	/* Vendor */
+				"Extended-Max-Supported-BW-UL",	/* Name */
+				AVP_FLAG_VENDOR | AVP_FLAG_MANDATORY,	/* Fixed flags */
+				AVP_FLAG_VENDOR,	/* Fixed flag values */
+				AVP_TYPE_UNSIGNED32	/* base type of data */
 			};
 			CHECK_dict_new( DICT_AVP, &data, NULL, NULL);
 		};
@@ -1017,11 +1065,11 @@ int dict_entry(char * conffile)
 	return dict_ts29214_avps_load_rules(conffile);
 }
 
-const char* dict_ts29214_avps_proto_ver(char * conffile) {
+const char* dict_proto_ver(char * conffile) {
 	return ts29214_avps_proto_ver;
 }
 
-const double dict_ts29214_avps_gen_ts(char * conffile) {
+const double dict_gen_ts(char * conffile) {
 	return ts29214_avps_gen_date;
 }
 
