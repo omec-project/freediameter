@@ -36,7 +36,7 @@ INCLUDE_DIRECTORIES(${LFDCORE_INCLUDES})
 ####
 # Diameter applications dictionaries
 
-FD_EXTENSION_SUBDIR(dict_nasreq "NASREQ (RFC4005) Dictionary definitions"       OFF)
+FD_EXTENSION_SUBDIR(dict_nasreq "NASREQ (RFC4005) Dictionary definitions"       ON)
 FD_EXTENSION_SUBDIR(dict_eap    "Diameter EAP (RFC4072) Dictionary definitions" ON)
 
 FD_EXTENSION_SUBDIR(dict_dcca   "Diameter CC (RFC4006) Dictionary definitions [incomplete]" ON)
@@ -45,8 +45,8 @@ FD_EXTENSION_SUBDIR(dict_dcca_starent   "Diameter CC Starent Dictionary definiti
 
 FD_EXTENSION_SUBDIR(dict_sip    "Diameter SIP (RFC4740) Dictionary definitions" ON)
 
-FD_EXTENSION_SUBDIR(dict_mip6a     "Diameter Mobile IPv6 Auth Dictionary definitions"         OFF)
-FD_EXTENSION_SUBDIR(dict_mip6i     "Diameter Mobile IPv6 IKE Dictionary definitions"          OFF)
+FD_EXTENSION_SUBDIR(dict_mip6a     "Diameter Mobile IPv6 Auth Dictionary definitions"         ON)
+FD_EXTENSION_SUBDIR(dict_mip6i     "Diameter Mobile IPv6 IKE Dictionary definitions"          ON)
 FD_EXTENSION_SUBDIR(dict_nas_mipv6 "Diameter NAS-to-HAAA Interaction Dictionary definitions"  ON)
 
 FD_EXTENSION_SUBDIR(dict_legacy_xml "Load Diameter dictionary definitions from XML files."    OFF)
@@ -72,7 +72,7 @@ FD_EXTENSION_SUBDIR(rt_ereg      "Configurable routing based on regexp matching 
 FD_EXTENSION_SUBDIR(rt_ignore_dh "Stow Destination-Host in Proxy-Info, restore to Origin-Host for answers"	ON)
 FD_EXTENSION_SUBDIR(rt_load_balance "Balance load over multiple equal hosts, based on outstanding requests"	ON)
 FD_EXTENSION_SUBDIR(rt_randomize "Randomly choose one of the highest scored hosts and increase its score by one"	ON)
-FD_EXTENSION_SUBDIR(rt_redirect  "Handling of Diameter Redirect messages" 			OFF)
+FD_EXTENSION_SUBDIR(rt_redirect  "Handling of Diameter Redirect messages" 			ON)
 
 
 ####
